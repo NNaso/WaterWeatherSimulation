@@ -38,7 +38,7 @@ public class WaterWeatherSimulationModSystem : ModSystem
 	{
 		bba.SetChunks(new Vec2i(chunkX, chunkZ), chunks);
 		
-		var blockPos = new BlockPos(0, Climate.Sealevel - 1, 0, 0);
+		var blockPos = new BlockPos(0, 0, 0, 0);
 		for (var x = chunkX * 32; x < chunkX * 32 + 32; x += 1 )
 			for (var z = chunkZ * 32; z < chunkZ * 32 + 32; z += 1)
 			{
@@ -47,7 +47,7 @@ public class WaterWeatherSimulationModSystem : ModSystem
 				
 				// Rain map height may return value out of world.
 				var y = bba.GetRainMapHeightAt(blockPos);
-				blockPos.Y = y < bba.MapSizeY ? y : Climate.Sealevel - 1;
+				blockPos.Y = y < bba.MapSizeY ? y : world.SeaLevel - 1;
 			
 				var block = bba.GetBlock(blockPos, BlockLayersAccess.Fluid);
 				if (block.BlockId != waterBlockId && block.BlockId != iceBlockId) continue;
